@@ -9,6 +9,9 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 
+const FName AIHateYouSheriffCharacter::MoveForwardBinding("MoveForward");
+const FName AIHateYouSheriffCharacter::MoveRightBinding("MoveRight");
+
 //////////////////////////////////////////////////////////////////////////
 // AIHateYouSheriffCharacter
 
@@ -34,7 +37,6 @@ AIHateYouSheriffCharacter::AIHateYouSheriffCharacter()
 
 	// Create a camera boom (pulls in towards the player if there is a collision)
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->bAbsoluteRotation = true; // Don't want arm to rotate when character does
 	CameraBoom->TargetArmLength = 800.f;
 	CameraBoom->RelativeRotation = FRotator(-60.f, 0.f, 0.f);
@@ -121,7 +123,7 @@ void AIHateYouSheriffCharacter::MoveForward(float Value)
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		const FRotator YawRotation(0, 0, 0); //second is Rotation.Yaw
 
 		// get forward vector
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
@@ -135,7 +137,7 @@ void AIHateYouSheriffCharacter::MoveRight(float Value)
 	{
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		const FRotator YawRotation(0, 0, 0); //second is Rotation.Yaw
 	
 		// get right vector 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);

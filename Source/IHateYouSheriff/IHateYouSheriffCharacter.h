@@ -29,6 +29,10 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	// Static names for axis bindings
+	static const FName MoveForwardBinding;
+	static const FName MoveRightBinding;
+
 protected:
 
 	/** Resets HMD orientation in VR. */
